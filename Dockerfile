@@ -17,7 +17,8 @@ RUN mkdir -p /opt/qupath &&\
     cd /opt/qupath/ && \
     wget https://github.com/qupath/qupath/releases/download/v0.5.1/QuPath-v0.5.1-Linux.tar.xz &&\
     tar -xvf QuPath-v0.5.1-Linux.tar.xz && \
-    rm /opt/qupath/QuPath-v0.5.1-Linux.tar.xz && \
+    mv /opt/qupath/QuPath-v0.5.1-Linux/* /opt/qupath/ && \
+    rm /opt/qupath/QuPath-v0.5.1-Linux.tar.xz /opt/qupath/QuPath-v0.5.1-Linux/ -rf && \
     chmod u+x /opt/qupath/QuPath/bin/QuPath
 
 # Generate and install favicons.
