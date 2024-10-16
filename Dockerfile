@@ -1,4 +1,4 @@
-FROM jlesage/baseimage-gui:ubuntu-22.04-v4 AS build
+FROM jlesage/baseimage-gui:ubuntu-24.04-v4 AS build
 
 MAINTAINER Bjoern Gruening, bjoern.gruening@gmail.com
 
