@@ -9,6 +9,7 @@ RUN apt-get update -y && \
          libgl1 \
          xz-utils \
          openjfx \
+         nano \
          qt5dxcb-plugin && \
      rm -rf /var/lib/apt/lists/*
 
