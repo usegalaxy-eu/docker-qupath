@@ -1,4 +1,4 @@
-FROM jlesage/baseimage-gui:ubuntu-22.04-v4 AS build
+FROM jlesage/baseimage-gui:ubuntu-24.04-v4 AS build
 
 MAINTAINER Bjoern Gruening, bjoern.gruening@gmail.com
 
@@ -15,9 +15,10 @@ RUN apt-get update -y && \
 RUN mkdir -p /opt/qupath &&\
     chmod 777 /opt/qupath &&\
     cd /opt/qupath/ && \
-    wget https://github.com/qupath/qupath/releases/download/v0.4.3/QuPath-0.4.3-Linux.tar.xz &&\
-    tar -xvf QuPath-0.4.3-Linux.tar.xz && \
-    rm /opt/qupath/QuPath-0.4.3-Linux.tar.xz && \
+    wget https://github.com/qupath/qupath/releases/download/v0.5.1/QuPath-v0.5.1-Linux.tar.xz &&\
+    tar -xvf QuPath-v0.5.1-Linux.tar.xz && \
+    mv /opt/qupath/QuPath-v0.5.1-Linux/* /opt/qupath/ && \
+    rm /opt/qupath/QuPath-v0.5.1-Linux.tar.xz /opt/qupath/QuPath-v0.5.1-Linux/ -rf && \
     chmod u+x /opt/qupath/QuPath/bin/QuPath
 
 # Generate and install favicons.
@@ -29,10 +30,10 @@ RUN chmod +x /startapp.sh
 
 # Installing a few extensions
 RUN cd /opt/qupath/QuPath/lib/app/ && \
-    wget https://github.com/qupath/qupath-extension-djl/releases/download/v0.2.0/qupath-extension-djl-0.2.0.jar &&\
-    wget https://github.com/qupath/qupath-extension-stardist/releases/download/v0.4.0/qupath-extension-stardist-0.4.0.jar &&\
-    sed -i '/^\[Application\]$/a app.classpath=$APPDIR/qupath-extension-djl-0.2.0.jar' QuPath.cfg  && \
-    sed -i '/^\[Application\]$/a app.classpath=$APPDIR/qupath-extension-stardist-0.4.0.jar' QuPath.cfg
+    wget https://github.com/qupath/qupath-extension-djl/releases/download/v0.3.0/qupath-extension-djl-0.3.0.jar &&\
+    wget https://github.com/qupath/qupath-extension-stardist/releases/download/v0.5.0/qupath-extension-stardist-0.5.0.jar &&\
+    sed -i '/^\[Application\]$/a app.classpath=$APPDIR/qupath-extension-djl-0.3.0.jar' QuPath.cfg  && \
+    sed -i '/^\[Application\]$/a app.classpath=$APPDIR/qupath-extension-stardist-0.5.0.jar' QuPath.cfg
 
 # Set the name of the application.
 ENV APP_NAME="QuPath"
