@@ -527,7 +527,7 @@
   
   <!-- title="QuPath" matches the main window -->
   <application title="QuPath">
-    <decor>no</decor>
+    <decor>yes</decor>
     <maximized>yes</maximized>
     <fullscreen>yes</fullscreen>
     <layer>below</layer>
@@ -540,17 +540,17 @@
     <layer>above</layer>
   </application>
 
-  <!--application type="utility" class="QuPath">
+  <application type="utility" class="QuPath">
     <decor>yes</decor>
     <maximized>no</maximized>
     <layer>above</layer>
-  </application-->
+  </application>
 
-  <!--application type="splash" class="QuPath">
+  <application type="splash" class="QuPath">
     <decor>yes</decor>
     <maximized>no</maximized>
     <layer>above</layer>
-  </application-->
+  </application>
 
 </applications>
 
