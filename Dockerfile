@@ -18,7 +18,6 @@ RUN mkdir -p /opt/qupath &&\
     cd /opt/qupath/ && \
     wget https://github.com/qupath/qupath/releases/download/v0.6.0/QuPath-v0.6.0-Linux.tar.xz &&\
     tar -xvf QuPath-v0.6.0-Linux.tar.xz && \
-    mv /opt/qupath/QuPath/ /opt/qupath/ && \
     rm /opt/qupath/QuPath-v0.6.0-Linux.tar.xz -rf && \
     chmod u+x /opt/qupath/QuPath/bin/QuPath
 
