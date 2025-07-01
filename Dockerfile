@@ -10,16 +10,16 @@ RUN apt-get update -y && \
          xz-utils \
          openjfx \
          nano \
+         unzip \
          qt5dxcb-plugin && \
      rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /opt/qupath &&\
     chmod 777 /opt/qupath &&\
     cd /opt/qupath/ && \
-    wget https://github.com/qupath/qupath/releases/download/v0.5.1/QuPath-v0.5.1-Linux.tar.xz &&\
-    tar -xvf QuPath-v0.5.1-Linux.tar.xz && \
-    mv /opt/qupath/QuPath-v0.5.1-Linux/* /opt/qupath/ && \
-    rm /opt/qupath/QuPath-v0.5.1-Linux.tar.xz /opt/qupath/QuPath-v0.5.1-Linux/ -rf && \
+    wget https://github.com/qupath/qupath/releases/download/v0.6.0/QuPath-v0.6.0-Linux.tar.xz &&\
+    tar -xvf QuPath-v0.6.0-Linux.tar.xz && \
+    rm /opt/qupath/QuPath-v0.6.0-Linux.tar.xz -rf && \
     chmod u+x /opt/qupath/QuPath/bin/QuPath
 
 # Generate and install favicons.
@@ -31,10 +31,18 @@ RUN chmod +x /startapp.sh
 
 # Installing a few extensions
 RUN cd /opt/qupath/QuPath/lib/app/ && \
-    wget https://github.com/qupath/qupath-extension-djl/releases/download/v0.3.0/qupath-extension-djl-0.3.0.jar &&\
-    wget https://github.com/qupath/qupath-extension-stardist/releases/download/v0.5.0/qupath-extension-stardist-0.5.0.jar &&\
-    sed -i '/^\[Application\]$/a app.classpath=$APPDIR/qupath-extension-djl-0.3.0.jar' QuPath.cfg  && \
-    sed -i '/^\[Application\]$/a app.classpath=$APPDIR/qupath-extension-stardist-0.5.0.jar' QuPath.cfg
+    wget https://github.com/qupath/qupath-extension-djl/releases/download/v0.4.0/qupath-extension-djl-0.4.0.jar &&\
+    wget https://github.com/qupath/qupath-extension-stardist/releases/download/v0.6.0/qupath-extension-stardist-0.6.0.jar &&\
+    wget https://github.com/qupath/qupath-extension-omero/releases/download/v0.1.0/qupath-extension-omero-0.1.0.jar &&\
+    wget https://github.com/qupath/qupath-extension-omero/releases/download/v0.1.0/qupath-extension-omero-0.1.0-javadoc.jar && \
+    sed -i '/^\[Application\]$/a app.classpath=$APPDIR/qupath-extension-djl-0.4.0.jar' QuPath.cfg  && \
+    sed -i '/^\[Application\]$/a app.classpath=$APPDIR/qupath-extension-stardist-0.6.0.jar' QuPath.cfg &&\
+    sed -i '/^\[Application\]$/a app.classpath=$APPDIR/qupath-extension-omero-0.1.0.jar' QuPath.cfg && \
+    sed -i '/^\[Application\]$/a app.classpath=$APPDIR/qupath-extension-omero-0.1.0-javadoc.jar' QuPath.cfg && \
+# get the OMERO ICE Java dependency
+    wget https://github.com/ome/openmicroscopy/releases/download/v5.6.15/OMERO.java-5.6.15-ice36.zip && \
+    unzip OMERO.java-5.6.15-ice36.zip && \
+    rm OMERO.java-5.6.15-ice36.zip 
 
 # Set the name of the application.
 ENV APP_NAME="QuPath"
