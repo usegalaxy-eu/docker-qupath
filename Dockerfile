@@ -10,6 +10,7 @@ RUN apt-get update -y && \
          xz-utils \
          openjfx \
          nano \
+         unzip \
          qt5dxcb-plugin && \
      rm -rf /var/lib/apt/lists/*
 
